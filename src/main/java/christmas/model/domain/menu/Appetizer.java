@@ -1,7 +1,5 @@
 package christmas.model.domain.menu;
 
-import christmas.model.domain.Category;
-
 public class Appetizer extends Menu {
 
     public Appetizer(String name, int price) {
