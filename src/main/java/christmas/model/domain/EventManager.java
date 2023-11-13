@@ -22,6 +22,10 @@ public class EventManager {
         return totalPrice >= 10000;
     }
 
+    public boolean isEligibleForPresentMenu() {
+        return totalPrice >= 120000;
+    }
+
     public List<Menu> getOrderMenuList() {
         return this.orderMenuList;
     }
