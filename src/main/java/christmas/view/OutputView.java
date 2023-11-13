@@ -19,7 +19,7 @@ public class OutputView {
 
     public void printTotalOrderPriceBeforeDiscount(EventManager eventManager) {
         System.out.println("<할인 전 총주문 금액>");
-        System.out.printf("%,d원", eventManager.getTotalPriceBeforeDiscount());
+        System.out.printf("%,d원\n", eventManager.getTotalPriceBeforeDiscount());
     }
 
     public void printPresentMenu(EventManager eventManager) {
@@ -31,20 +31,16 @@ public class OutputView {
         System.out.println("없음");
     }
 
-    /**
-     * <혜택 내역>
-     * 크리스마스 디데이 할인: -1,200원
-     * 평일 할인: -4,046원
-     * 특별 할인: -1,000원
-     * 증정 이벤트: -25,000원
-     */
-
     public void printBenefitList(EventManager eventManager) {
         System.out.println("<혜택 내역>");
-        HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
-        for(Map.Entry<DiscountPolicyName, Integer> benefitDetail : benefitDetails.entrySet()) {
-            System.out.printf("%s: %,d원\n", benefitDetail.getKey(), benefitDetail.getValue());
+        if(eventManager.isEligibleForBenefitList()) {
+            HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
+            for (Map.Entry<DiscountPolicyName, Integer> benefitDetail : benefitDetails.entrySet()) {
+                System.out.printf("%s: %,d원\n", benefitDetail.getKey(), benefitDetail.getValue());
+            }
+            return;
         }
+        System.out.println("없음");
     }
 
     public void printTotalBenefitPriceAfterDiscount(EventManager eventManager) {
@@ -52,8 +48,13 @@ public class OutputView {
         System.out.printf("%,d원\n", eventManager.getTotalBenefitAfterDiscount());
     }
 
-    public void printTotalPriceAfterDiscount(EventManager eventManager) {
+    public void printTotalOrderPriceAfterDiscount(EventManager eventManager) {
         System.out.println("<할인 후 예상 결제 금액>");
         System.out.printf("%,d원\n", eventManager.getTotalPriceAfterDiscount());
+    }
+
+    public void printEventBadge(EventManager eventManager) {
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(eventManager.getEventBadge());
     }
 }
