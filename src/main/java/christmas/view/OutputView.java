@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.model.domain.EventManager;
+import christmas.model.domain.event.EventManager;
 import christmas.model.domain.discount.DiscountPolicyName;
 import christmas.model.domain.menu.Menu;
 

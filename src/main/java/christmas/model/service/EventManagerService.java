@@ -1,7 +1,7 @@
 package christmas.model.service;
 
-import christmas.model.domain.EventCalendar;
-import christmas.model.domain.EventManager;
+import christmas.model.domain.event.EventCalendar;
+import christmas.model.domain.event.EventManager;
 import christmas.model.domain.discount.condition.*;
 import christmas.model.domain.discount.policy.*;
 

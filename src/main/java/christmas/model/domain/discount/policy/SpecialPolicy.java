@@ -1,12 +1,9 @@
 package christmas.model.domain.discount.policy;
 
-import christmas.model.domain.EventManager;
+import christmas.model.domain.event.EventManager;
 import christmas.model.domain.discount.DiscountPolicyName;
-import christmas.model.domain.menu.Category;
-import christmas.model.domain.menu.Menu;
 
 import java.util.HashMap;
-import java.util.List;
 
 import static christmas.model.domain.discount.DiscountPolicyName.*;
 

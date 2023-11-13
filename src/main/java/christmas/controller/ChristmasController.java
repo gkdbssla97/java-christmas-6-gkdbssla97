@@ -1,7 +1,7 @@
 package christmas.controller;
 
-import christmas.model.domain.EventCalendar;
-import christmas.model.domain.EventManager;
+import christmas.model.domain.event.EventCalendar;
+import christmas.model.domain.event.EventManager;
 import christmas.model.domain.menu.Menu;
 import christmas.model.service.EventManagerService;
 import christmas.model.service.MenuService;
