@@ -1,5 +1,6 @@
 package christmas.model.domain;
 
+import christmas.model.domain.discount.DiscountPolicyName;
 import christmas.model.domain.menu.Menu;
 
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.List;
 public class EventManager {
     private List<Menu> orderMenuList;
     private int totalPrice;
-    private HashMap<String, Integer> benefitDetails;
+    private HashMap<DiscountPolicyName, Integer> benefitDetails;
 
     public EventManager() {
         initializeBenefitDetails();
@@ -25,11 +26,11 @@ public class EventManager {
     }
 
     public void initializeBenefitDetails() {
-        benefitDetails.put("크리스마스 디데이 할인", 0);
-        benefitDetails.put("평일 할인", 0);
-        benefitDetails.put("주말 할인", 0);
-        benefitDetails.put("특별 할인", 0);
-        benefitDetails.put("증정 이벤트", 0);
+        benefitDetails.put(DiscountPolicyName.CHRISTMAS_D_DAY, 0);
+        benefitDetails.put(DiscountPolicyName.WEEKDAY, 0);
+        benefitDetails.put(DiscountPolicyName.WEEKEND, 0);
+        benefitDetails.put(DiscountPolicyName.SPECIAL, 0);
+        benefitDetails.put(DiscountPolicyName.PRESENT_EVENT, 0);
     }
 
     public boolean isEligibleForDiscount() {
@@ -48,7 +49,7 @@ public class EventManager {
         return totalPrice;
     }
 
-    public HashMap<String, Integer> getBenefitDetails() {
+    public HashMap<DiscountPolicyName, Integer> getBenefitDetails() {
         return benefitDetails;
     }
 }
