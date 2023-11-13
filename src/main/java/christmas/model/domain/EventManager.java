@@ -74,12 +74,12 @@ public class EventManager {
     }
 
     public int getTotalBenefitAfterDiscount() {
-        int totalBenefitByDiscount = this.totalPrice;
+        int totalBenefitByDiscount = 0;
         for (Map.Entry<DiscountPolicyName, Integer> benefitDetail : benefitDetails.entrySet()) {
-            totalBenefitByDiscount -= benefitDetail.getValue();
+            totalBenefitByDiscount += benefitDetail.getValue();
         }
-        this.benefitPrice = totalBenefitByDiscount;
 
+        this.benefitPrice = totalBenefitByDiscount;
         return totalBenefitByDiscount;
     }
 
