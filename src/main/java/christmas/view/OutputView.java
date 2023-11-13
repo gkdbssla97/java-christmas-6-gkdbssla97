@@ -36,7 +36,7 @@ public class OutputView {
         if(eventManager.isEligibleForBenefitList()) {
             HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
             for (Map.Entry<DiscountPolicyName, Integer> benefitDetail : benefitDetails.entrySet()) {
-                System.out.printf("%s: %,d원\n", benefitDetail.getKey(), benefitDetail.getValue());
+                System.out.printf("%s: %,d원\n", benefitDetail.getKey().getDiscountPolicy(), benefitDetail.getValue());
             }
             return;
         }
