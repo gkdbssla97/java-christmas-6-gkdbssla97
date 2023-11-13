@@ -2,8 +2,8 @@ package christmas.model.domain.menu;
 
 public class Drink extends Menu {
 
-    public Drink(String name, int price) {
-        super(name, price, Category.DRINK);
+    public Drink(String name, int count) {
+        super(name, count, Category.DRINK);
     }
 
     @Override
