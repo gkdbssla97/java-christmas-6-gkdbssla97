@@ -8,10 +8,12 @@ import christmas.model.domain.menu.Menu;
 import java.util.HashMap;
 import java.util.List;
 
+import static christmas.model.domain.discount.DiscountPolicyName.*;
+
 public class WeekdayPolicy implements DiscountPolicy{
     @Override
     public void discount(EventManager eventManager, int date) {
-        HashMap<String, Integer> benefitDetails = eventManager.getBenefitDetails();
+        HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
         List<Menu> orderMenuList = eventManager.getOrderMenuList();
 
         int discountPrice = 0;
@@ -20,7 +22,7 @@ public class WeekdayPolicy implements DiscountPolicy{
                 discountPrice += menu.getCount() * 2023;
             }
         }
-        benefitDetails.put(DiscountPolicyName.WEEKDAY.getDiscountPolicy(),
-                benefitDetails.getOrDefault(DiscountPolicyName.WEEKDAY.getDiscountPolicy(), 0) + (-discountPrice));
+        benefitDetails.put(WEEKDAY,
+                benefitDetails.getOrDefault(WEEKDAY, 0) + (-discountPrice));
     }
 }

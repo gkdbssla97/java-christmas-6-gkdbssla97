@@ -8,12 +8,14 @@ import christmas.model.domain.menu.Menu;
 import java.util.HashMap;
 import java.util.List;
 
+import static christmas.model.domain.discount.DiscountPolicyName.*;
+
 public class PresentEventPolicy implements DiscountPolicy{
     @Override
     public void discount(EventManager eventManager, int date) {
-        HashMap<String, Integer> benefitDetails = eventManager.getBenefitDetails();
+        HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
 
-        benefitDetails.put(DiscountPolicyName.PRESENT_EVENT.getDiscountPolicy(),
-                benefitDetails.getOrDefault(DiscountPolicyName.PRESENT_EVENT.getDiscountPolicy(), 0) + (-25000));
+        benefitDetails.put(PRESENT_EVENT,
+                benefitDetails.getOrDefault(PRESENT_EVENT, 0) + (-25000));
     }
 }
