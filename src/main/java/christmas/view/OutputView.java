@@ -1,9 +1,11 @@
 package christmas.view;
 
 import christmas.model.domain.EventManager;
+import christmas.model.domain.discount.DiscountPolicyName;
 import christmas.model.domain.menu.Menu;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OutputView {
 
@@ -17,7 +19,7 @@ public class OutputView {
 
     public void printTotalOrderPriceBeforeDiscount(EventManager eventManager) {
         System.out.println("<할인 전 총주문 금액>");
-        System.out.printf("%,d원", eventManager.getTotalPrice());
+        System.out.printf("%,d원", eventManager.getTotalPriceBeforeDiscount());
     }
 
     public void printPresentMenu(EventManager eventManager) {
@@ -37,7 +39,21 @@ public class OutputView {
      * 증정 이벤트: -25,000원
      */
 
-    public void discountList() {
+    public void printBenefitList(EventManager eventManager) {
         System.out.println("<혜택 내역>");
+        HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
+        for(Map.Entry<DiscountPolicyName, Integer> benefitDetail : benefitDetails.entrySet()) {
+            System.out.printf("%s: %,d원\n", benefitDetail.getKey(), benefitDetail.getValue());
+        }
+    }
+
+    public void printTotalBenefitPrice(EventManager eventManager) {
+        System.out.println("<총혜택 금액>");
+        System.out.printf("%,d원\n", eventManager.getTotalPriceAfterDiscount());
+    }
+
+    public void printTotalPriceAfterDiscount(EventManager eventManager) {
+        System.out.println("<할인 후 예상 결제 금액>");
+
     }
 }
