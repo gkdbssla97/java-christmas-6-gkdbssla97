@@ -47,13 +47,13 @@ public class OutputView {
         }
     }
 
-    public void printTotalBenefitPrice(EventManager eventManager) {
+    public void printTotalBenefitPriceAfterDiscount(EventManager eventManager) {
         System.out.println("<총혜택 금액>");
-        System.out.printf("%,d원\n", eventManager.getTotalPriceAfterDiscount());
+        System.out.printf("%,d원\n", eventManager.getTotalBenefitAfterDiscount());
     }
 
     public void printTotalPriceAfterDiscount(EventManager eventManager) {
         System.out.println("<할인 후 예상 결제 금액>");
-
+        System.out.printf("%,d원\n", eventManager.getTotalPriceAfterDiscount());
     }
 }
