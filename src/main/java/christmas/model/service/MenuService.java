@@ -11,20 +11,40 @@ public class MenuService {
     public void orderMenuList(EventManager eventManager, String menus, List<Menu> menuList) {
         List<Menu> orderMenuList = new ArrayList<>();
         String[] menusInfos = menus.split(",");
-        for(String menuInfo : menusInfos) {
+        for (String menuInfo : menusInfos) {
             String[] menu = menuInfo.split("-");
             String name = menu[0];
-            String price = menu[1];
             Category menuCategory = findMenuCategory(menuList, name);
+            Menu registerMenu = registerMenu(menuCategory, menu);
+            orderMenuList.add(registerMenu);
         }
+        eventManager.orderMenuList(orderMenuList);
+        eventManager.calculateTotalOrderPrice();
+    }
+
+    public Menu registerMenu(Category category, String[] menu) {
+        String name = menu[0];
+        int count = Integer.parseInt(menu[1]);
+
+        if (category.getCategory().equals(Category.APPETIZER.getCategory())) {
+            return new Appetizer(name, count);
+        } else if (category.getCategory().equals(Category.MAIN.getCategory())) {
+            return new Main(name, count);
+        } else if (category.getCategory().equals(Category.DRINK.getCategory())) {
+            return new Drink(name, count);
+        } else if (category.getCategory().equals(Category.DESSERT.getCategory())) {
+            return new Dessert(name, count);
+        }
+        throw new IllegalArgumentException("메뉴 X");
     }
 
     public Category findMenuCategory(List<Menu> menuList, String name) {
-        for(Menu menu : menuList) {
-            if(menu.getName().equals(name)) {
+        for (Menu menu : menuList) {
+            if (menu.getName().equals(name)) {
                 return menu.getCategory();
             }
-        } throw new IllegalArgumentException();
+        }
+        throw new IllegalArgumentException();
     }
 
     public List<Menu> initMenuList() {
