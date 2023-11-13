@@ -13,9 +13,13 @@ public class EventManager {
     }
 
     public void calculateTotalOrderPrice() {
-        for(Menu menu : this.orderMenuList) {
+        for (Menu menu : this.orderMenuList) {
             this.totalPrice += menu.getPrice();
         }
+    }
+
+    public boolean isEligibleForDiscount() {
+        return totalPrice >= 10000;
     }
 
     public List<Menu> getOrderMenuList() {
