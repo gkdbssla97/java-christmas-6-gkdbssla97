@@ -15,7 +15,7 @@ public enum EventBadge {
         this.minAmount = minAmount;
     }
 
-    public static EventBadge getEventBadge(int minAmount) {
+    public static EventBadge grantEventBadge(int minAmount) {
         if (minAmount >= SANTA.minAmount) {
             return EventBadge.SANTA;
         } else if (minAmount >= TREE.minAmount) {
