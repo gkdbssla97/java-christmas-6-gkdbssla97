@@ -47,7 +47,7 @@ public class MenuService {
         throw new IllegalArgumentException();
     }
 
-    public List<Menu> initMenuList() {
+    public List<Menu> initializeMenuList() {
         List<Menu> menuList = new ArrayList<>();
 
         registerAppetizer(menuList);
