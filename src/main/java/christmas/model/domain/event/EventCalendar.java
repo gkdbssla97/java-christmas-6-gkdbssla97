@@ -20,10 +20,10 @@ public class EventCalendar {
     }
 
     public boolean isSpecialDay(int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2023, Calendar.DECEMBER, day);
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        Calendar calendar = getInstance();
+        calendar.set(2023, DECEMBER, day);
+        int dayOfWeek = calendar.get(DAY_OF_WEEK);
 
-        return dayOfWeek == Calendar.SUNDAY || day == 25;
+        return dayOfWeek == SUNDAY || day == 25;
     }
 }

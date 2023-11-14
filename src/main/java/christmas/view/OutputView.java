@@ -45,7 +45,7 @@ public class OutputView {
 
     public void printTotalBenefitPriceAfterDiscount(EventManager eventManager) {
         System.out.println("<총혜택 금액>");
-        System.out.printf("%,d원\n", eventManager.getTotalBenefitAfterDiscount());
+        System.out.printf("%,d원\n", eventManager.calculateTotalBenefitAfterDiscount());
     }
 
     public void printTotalOrderPriceAfterDiscount(EventManager eventManager) {
