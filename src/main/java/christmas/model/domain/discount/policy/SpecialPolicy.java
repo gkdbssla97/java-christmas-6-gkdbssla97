@@ -12,7 +12,7 @@ public class SpecialPolicy implements DiscountPolicy{
     public void discount(EventManager eventManager, int date) {
         HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
 
-        benefitDetails.putIfAbsent(SPECIAL,
+        benefitDetails.put(SPECIAL,
                 benefitDetails.getOrDefault(SPECIAL, 0) + (-1000));
     }
 }
