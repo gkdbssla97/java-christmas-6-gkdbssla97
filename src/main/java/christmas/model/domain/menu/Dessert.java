@@ -6,9 +6,4 @@ public class Dessert extends Menu{
     public Dessert(String name, int count) {
         super(name, count, DESSERT);
     }
-
-    @Override
-    public int getDiscountedPrice() {
-        return 0;
-    }
 }

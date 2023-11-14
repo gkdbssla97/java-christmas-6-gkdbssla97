@@ -7,9 +7,4 @@ public class Drink extends Menu {
     public Drink(String name, int count) {
         super(name, count, DRINK);
     }
-
-    @Override
-    public int getDiscountedPrice() {
-        return 0;
-    }
 }
