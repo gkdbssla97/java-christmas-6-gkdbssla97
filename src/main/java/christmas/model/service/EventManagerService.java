@@ -9,6 +9,8 @@ public class EventManagerService {
 
     public void processBenefitDetails(int date, EventManager eventManager, EventCalendar eventCalendar) {
 
+        if(!eventManager.isEligibleForDiscount()) return;
+
         applyDDayBenefit(date, eventManager, eventCalendar);
         applyWeekdayBenefit(date, eventManager, eventCalendar);
         applyWeekendBenefit(date, eventManager, eventCalendar);
