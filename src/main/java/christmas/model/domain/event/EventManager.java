@@ -2,6 +2,7 @@ package christmas.model.domain.event;
 
 import christmas.model.domain.discount.DiscountPolicyName;
 import christmas.model.domain.menu.Menu;
+import christmas.model.domain.menu.Price;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -25,7 +26,7 @@ public class EventManager {
 
     public void calculateTotalOrderPrice() {
         for (Menu menu : this.orderMenuList) {
-            this.totalPrice += menu.getPrice();
+            this.totalPrice += (menu.getPrice() * menu.getCount());
         }
     }
 
@@ -73,7 +74,7 @@ public class EventManager {
         return benefitPrice;
     }
 
-    public int getTotalBenefitAfterDiscount() {
+    public int calculateTotalBenefitAfterDiscount() {
         int totalBenefitByDiscount = 0;
         for (Map.Entry<DiscountPolicyName, Integer> benefitDetail : benefitDetails.entrySet()) {
             totalBenefitByDiscount += benefitDetail.getValue();
@@ -84,6 +85,9 @@ public class EventManager {
     }
 
     public int getTotalPriceAfterDiscount() {
+        if(isEligibleForPresentMenu()) {
+            return this.totalPrice + this.benefitPrice + Price.샴페인.getPrice();
+        }
         return this.totalPrice + this.benefitPrice;
     }
 
