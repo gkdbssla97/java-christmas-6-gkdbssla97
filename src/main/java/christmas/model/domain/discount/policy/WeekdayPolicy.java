@@ -1,16 +1,15 @@
 package christmas.model.domain.discount.policy;
 
-import christmas.model.domain.event.EventManager;
 import christmas.model.domain.discount.DiscountPolicyName;
-import christmas.model.domain.menu.Category;
+import christmas.model.domain.event.EventManager;
 import christmas.model.domain.menu.Menu;
 
 import java.util.HashMap;
 import java.util.List;
 
-import static christmas.model.domain.discount.DiscountPolicyName.*;
-import static christmas.model.domain.menu.Category.*;
-import static christmas.util.constant.NumberConstant.*;
+import static christmas.model.domain.discount.DiscountPolicyName.WEEKDAY;
+import static christmas.model.domain.menu.Category.DESSERT;
+import static christmas.util.constant.NumberConstant.EVENT_YEAR;
 
 public class WeekdayPolicy implements DiscountPolicy{
     @Override
@@ -21,7 +20,7 @@ public class WeekdayPolicy implements DiscountPolicy{
         int discountPrice = 0;
         for(Menu menu : orderMenuList) {
             if(menu.getCategory().equals(DESSERT)) {
-                discountPrice += menu.getCount() * EVENT_YEAR;
+                discountPrice += EVENT_YEAR;
             }
         }
         benefitDetails.put(WEEKDAY,
