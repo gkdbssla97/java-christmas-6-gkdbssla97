@@ -1,18 +1,21 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.model.domain.event.EventMenu;
+import christmas.util.constant.ViewConstant;
 
-import static christmas.util.validate.view.InputValidate.*;
+import static christmas.util.constant.ViewConstant.*;
+import static christmas.util.validate.InputValidate.*;
 
 public class InputView {
 
     public int readDate() {
-        System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
-        while(true) {
+        System.out.println(WELCOME_EVENT_PLANNER);
+        while (true) {
             try {
-                System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
+                System.out.println(INPUT_VISITING_DAY);
                 String input = Console.readLine();
-                int visitingDate = parseAndValidateIntegerInput(input);
+                int visitingDate = parseAndValidateInputDate(input);
                 validateVisitDateByEventPeriod(visitingDate);
                 return visitingDate;
             } catch (IllegalArgumentException e) {
@@ -21,14 +24,22 @@ public class InputView {
         }
     }
 
-    public String readMenu() {
-        while(true) {
+    public String readMenu(EventMenu eventMenu) {
+        while (true) {
             try {
-                System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
+                System.out.println(INPUT_ORDERING_MENUS);
                 String input = Console.readLine();
+                validateInputMenusFormatByOrder(input);
+                validateMenusNameByOrder(eventMenu, input);
+                validateMenusQuantityByOrder(input);
+                validateDuplicateInputMenusNameByOrder(input);
+                validateInputMenusByOrderingOnlyDrink(eventMenu, input);
+                validateInputMenusMaxQuantityByOrder(input);
+                return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
+
 }

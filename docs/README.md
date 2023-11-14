@@ -114,15 +114,26 @@
     - 총혜택 금액 산정에 따른 금액을 출력한다.
     - 할인 후 예상 결제 금액 산정에 따른 금액을 출력한다.
     - 혜택 금액에 따른 12월 이벤트 배지 종류를 출력한다.
-    
+### Util
+- **Constant**
+- 상수(constant)는 변하지 않는 값으로 실행될 때 변경되지 않는 값을 기준으로 한다.
+  - NumberConstant
+    - 날짜 관련 정수형을 상수 처리
+- **validate**
+- Enum Type으로 카테고리와 입력 에러 메시지를 안전하게 관리한다.
+  - DateError
+    - 날짜 입력 에러메세지를 출력한다.
+  - MenuError
+    - 메뉴 입력 에러메세지를 출력한다.
 ## 📌 예외처리 목록
 
 - 예외는 Exception이 아닌 IllegalArgumentException, IllegalStateException 등과 같은 명확한 유형을 처리한다.
 - 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException를 발생시키고, `[ERROR]`로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
     - **예외발생 시 Application가 종료되어선 안 된다.**
-    - 예외처리 기능 목록은 `[O]`로 double-check한다. 
+    - 예외처리 기능 목록은 `[O]`로 double-check한다.
+
 ### View
-- **InputView**
+- **InputValidate**
     - 사용자의 입력 로직을 예외 처리한다.
     - 방문 날짜 입력
       - 입력 값은 정수형으로 입력받는다. [O]
@@ -137,4 +148,3 @@
       - 음료만 주문 시, 주문할 수 없으므로 예외를 발생한다. [O]
       - 메뉴는 한 번에 최대 20개까지만 주문할 수 있다. [O]
         - 메뉴 이름 개수가 아닌, 메뉴 수량이 총합 20개를 넘어서는 안 된다.
-- **OutputView**
