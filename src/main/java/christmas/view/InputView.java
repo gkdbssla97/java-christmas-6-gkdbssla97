@@ -1,7 +1,8 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.util.validate.InputValidate;
+
+import static christmas.util.validate.view.InputValidate.*;
 
 public class InputView {
 
@@ -11,8 +12,9 @@ public class InputView {
             try {
                 System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
                 String input = Console.readLine();
-                int integerInput = InputValidate.parseAndValidateIntegerInput(input);
-                return integerInput;
+                int visitingDate = parseAndValidateIntegerInput(input);
+                validateVisitDateByEventPeriod(visitingDate);
+                return visitingDate;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -23,7 +25,7 @@ public class InputView {
         while(true) {
             try {
                 System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
-                return Console.readLine();
+                String input = Console.readLine();
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
