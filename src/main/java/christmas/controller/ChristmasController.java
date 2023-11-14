@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.model.domain.event.EventCalendar;
 import christmas.model.domain.event.EventManager;
+import christmas.model.domain.event.EventMenu;
 import christmas.model.domain.menu.Menu;
 import christmas.model.service.EventManagerService;
 import christmas.model.service.MenuService;
@@ -14,6 +15,7 @@ public class ChristmasController {
 
     private final EventManager eventManager = new EventManager();
     private final EventCalendar eventCalendar = new EventCalendar();
+    private final EventMenu eventMenu = new EventMenu();
 
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
@@ -22,12 +24,12 @@ public class ChristmasController {
 
     public void startEvent() {
 
-        List<Menu> menuList = menuService.initializeMenuList();
+        menuService.initializeMenuList(eventMenu);
 
         int date = inputView.readDate();
-        String menus = inputView.readMenu();
+        String menus = inputView.readMenu(eventMenu);
 
-        menuService.orderMenuList(eventManager, menus, menuList);
+        menuService.orderMenuList(eventManager, menus, eventMenu);
 
         outputView.printMenuList(eventManager);
 
