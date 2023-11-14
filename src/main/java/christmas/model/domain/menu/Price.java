@@ -1,5 +1,9 @@
 package christmas.model.domain.menu;
 
+import christmas.util.validate.input.MenuError;
+
+import static christmas.util.validate.input.MenuError.*;
+
 public enum Price {
 
     양송이수프(6000), 타파스(5500), 시저샐러드(8000),
@@ -24,6 +28,6 @@ public enum Price {
                 return p.getPrice();
             }
         }
-        throw new IllegalArgumentException("[ERROR] 해당 이름을 가진 메뉴가 없습니다. " + name);
+        throw new IllegalArgumentException(INVALID_ORDER.getErrorMessage());
     }
 }

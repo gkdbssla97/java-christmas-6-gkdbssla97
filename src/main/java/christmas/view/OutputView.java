@@ -3,58 +3,63 @@ package christmas.view;
 import christmas.model.domain.event.EventManager;
 import christmas.model.domain.discount.DiscountPolicyName;
 import christmas.model.domain.menu.Menu;
+import christmas.util.constant.ViewConstant;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static christmas.util.constant.ViewConstant.*;
+
 public class OutputView {
 
     public void printMenuList(EventManager eventManager) {
-        System.out.println("12월 3일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
-        System.out.println("<주문 메뉴>");
+        System.out.println(PREVIEW_EVENT_BENEFIT);
+        System.out.println(ORDER_MENU);
         for(Menu orderMenu: eventManager.getOrderMenuList()) {
-            System.out.printf("%s %d개\n", orderMenu.getName(), orderMenu.getCount());
+            System.out.printf(MENU_INFO_FORMAT, orderMenu.getName(), orderMenu.getCount());
         }
     }
 
     public void printTotalOrderPriceBeforeDiscount(EventManager eventManager) {
-        System.out.println("<할인 전 총주문 금액>");
-        System.out.printf("%,d원\n", eventManager.getTotalPriceBeforeDiscount());
+        System.out.println(TOTAL_PRICE_BEFORE_DISCOUNT);
+        System.out.printf(TOTAL_PRICE_BEFORE_DISCOUNT_FORMAT, eventManager.getTotalPriceBeforeDiscount());
     }
 
     public void printPresentMenu(EventManager eventManager) {
-        System.out.println("<증정 메뉴>");
+        System.out.println(PRESENT_MENU);
         if(eventManager.isEligibleForPresentMenu()) {
-            System.out.println("샴페인 1개");
+            System.out.println(CHAMPAGNE_ONE);
             return;
         }
-        System.out.println("없음");
+        System.out.println(NONE);
     }
 
     public void printBenefitList(EventManager eventManager) {
-        System.out.println("<혜택 내역>");
+        System.out.println(BENEFIT_LIST);
         if(eventManager.isEligibleForBenefitList()) {
             HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
             for (Map.Entry<DiscountPolicyName, Integer> benefitDetail : benefitDetails.entrySet()) {
-                System.out.printf("%s: %,d원\n", benefitDetail.getKey().getDiscountPolicy(), benefitDetail.getValue());
+                if(benefitDetail.getValue() != 0) {
+                    System.out.printf(BENEFIT_LIST_FORMAT, benefitDetail.getKey().getDiscountPolicy(), benefitDetail.getValue());
+                }
             }
             return;
         }
-        System.out.println("없음");
+        System.out.println(NONE);
     }
 
     public void printTotalBenefitPriceAfterDiscount(EventManager eventManager) {
-        System.out.println("<총혜택 금액>");
-        System.out.printf("%,d원\n", eventManager.calculateTotalBenefitAfterDiscount());
+        System.out.println(TOTAL_BENEFIT_PRICE);
+        System.out.printf(TOTAL_BENEFIT_PRICE_FORMAT, eventManager.calculateTotalBenefitAfterDiscount());
     }
 
     public void printTotalOrderPriceAfterDiscount(EventManager eventManager) {
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.printf("%,d원\n", eventManager.getTotalPriceAfterDiscount());
+        System.out.println(TOTAL_PRICE_AFTER_DISCOUNT);
+        System.out.printf(TOTAL_PRICE_AFTER_DISCOUNT_FORMAT, eventManager.getTotalPriceAfterDiscount());
     }
 
     public void printEventBadge(EventManager eventManager) {
-        System.out.println("<12월 이벤트 배지>");
+        System.out.println(EVENT_BADGE);
         System.out.println(eventManager.getEventBadge());
     }
 }

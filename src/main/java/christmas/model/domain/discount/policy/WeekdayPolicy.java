@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static christmas.model.domain.discount.DiscountPolicyName.*;
+import static christmas.model.domain.menu.Category.*;
 import static christmas.util.constant.NumberConstant.*;
 
 public class WeekdayPolicy implements DiscountPolicy{
@@ -19,7 +20,7 @@ public class WeekdayPolicy implements DiscountPolicy{
 
         int discountPrice = 0;
         for(Menu menu : orderMenuList) {
-            if(menu.getCategory().equals(Category.DESSERT)) {
+            if(menu.getCategory().equals(DESSERT)) {
                 discountPrice += menu.getCount() * EVENT_YEAR;
             }
         }

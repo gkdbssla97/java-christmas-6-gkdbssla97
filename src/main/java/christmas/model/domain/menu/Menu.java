@@ -1,5 +1,7 @@
 package christmas.model.domain.menu;
 
+import static christmas.model.domain.menu.Price.*;
+
 public abstract class Menu {
 
     private final String name;
@@ -7,13 +9,11 @@ public abstract class Menu {
     private final Category category;
     private final int price;
 
-    public abstract int getDiscountedPrice();
-
     public Menu(String name, int count, Category category) {
         this.name = name;
         this.count = count;
         this.category = category;
-        this.price = Price.findPrice(name);
+        this.price = findPrice(name);
     }
 
     public String getName() {
