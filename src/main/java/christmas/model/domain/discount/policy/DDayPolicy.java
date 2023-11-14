@@ -11,7 +11,7 @@ public class DDayPolicy implements DiscountPolicy {
     @Override
     public void discount(EventManager eventManager, int date) {
         HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
-        benefitDetails.putIfAbsent(CHRISTMAS_D_DAY,
+        benefitDetails.put(CHRISTMAS_D_DAY,
                 benefitDetails.getOrDefault(CHRISTMAS_D_DAY, 0) + (-discountAlgorithm(date)));
     }
 
