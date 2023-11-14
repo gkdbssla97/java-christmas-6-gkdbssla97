@@ -1,19 +1,21 @@
 package christmas.model.domain.event;
 
-import java.util.List;
+import christmas.util.constant.NumberConstant;
+
 import java.util.Calendar;
 
+import static christmas.util.constant.NumberConstant.*;
 import static java.util.Calendar.*;
 
 public class EventCalendar {
 
     public boolean isChristmasDDay(int day) {
-        return 1 <= day && day <= 25;
+        return D_DAY_MIN <= day && day <= D_DAY_MAX;
     }
 
     public boolean isWeekend(int day) {
         Calendar calendar = getInstance();
-        calendar.set(2023, DECEMBER, day);
+        calendar.set(NumberConstant.EVENT_YEAR, DECEMBER, day);
         int dayOfWeek = calendar.get(DAY_OF_WEEK);
 
         return dayOfWeek == FRIDAY || dayOfWeek == SATURDAY;
@@ -21,9 +23,9 @@ public class EventCalendar {
 
     public boolean isSpecialDay(int day) {
         Calendar calendar = getInstance();
-        calendar.set(2023, DECEMBER, day);
+        calendar.set(NumberConstant.EVENT_YEAR, DECEMBER, day);
         int dayOfWeek = calendar.get(DAY_OF_WEEK);
 
-        return dayOfWeek == SUNDAY || day == 25;
+        return dayOfWeek == SUNDAY || day == CHRISTMAS_DAY;
     }
 }

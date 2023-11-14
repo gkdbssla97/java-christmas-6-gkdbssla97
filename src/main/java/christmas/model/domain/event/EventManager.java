@@ -3,11 +3,15 @@ package christmas.model.domain.event;
 import christmas.model.domain.discount.DiscountPolicyName;
 import christmas.model.domain.menu.Menu;
 import christmas.model.domain.menu.Price;
+import christmas.util.constant.NumberConstant;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static christmas.model.domain.menu.Price.*;
+import static christmas.util.constant.NumberConstant.*;
 
 public class EventManager {
     private List<Menu> orderMenuList;
@@ -39,11 +43,11 @@ public class EventManager {
     }
 
     public boolean isEligibleForDiscount() {
-        return totalPrice >= 10000;
+        return totalPrice >= ELIGIBLE_FOR_DISCOUNT;
     }
 
     public boolean isEligibleForPresentMenu() {
-        return totalPrice >= 120000;
+        return totalPrice >= ELIGIBLE_PRESENT_PRICE;
     }
 
     public boolean isEligibleForBenefitList() {
@@ -86,7 +90,7 @@ public class EventManager {
 
     public int getTotalPriceAfterDiscount() {
         if(isEligibleForPresentMenu()) {
-            return this.totalPrice + this.benefitPrice + Price.샴페인.getPrice();
+            return this.totalPrice + this.benefitPrice + 샴페인.getPrice();
         }
         return this.totalPrice + this.benefitPrice;
     }

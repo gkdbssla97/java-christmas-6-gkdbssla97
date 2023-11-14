@@ -1,31 +1,35 @@
-package christmas.util.validate.view;
+package christmas.util.validate;
 
-import christmas.model.domain.event.EventManager;
 import christmas.model.domain.event.EventMenu;
 import christmas.model.domain.menu.Category;
 import christmas.model.domain.menu.Menu;
+import christmas.util.validate.input.MenuError;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import static christmas.util.constant.NumberConstant.*;
+import static christmas.util.validate.input.DateError.*;
+import static christmas.util.validate.input.MenuError.*;
+
 public class InputValidate {
 
-    public static int parseAndValidateIntegerInput(String input) {
+    public static int parseAndValidateInputDate(String input) {
         int parsingIntegerInput;
 
         try {
             parsingIntegerInput = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 입력값 '" + input + "'은 숫자로만 입력해야 합니다.");
+            throw new IllegalArgumentException(INVALID_DATE.getErrorMessage());
         }
         return parsingIntegerInput;
     }
 
     public static void validateVisitDateByEventPeriod(int input) {
-        if (31 < input || input < 1) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+        if (EVENT_END_DAY < input || input < EVENT_BEGIN_DAY) {
+            throw new IllegalArgumentException(INVALID_DATE.getErrorMessage());
         }
     }
 
@@ -37,7 +41,7 @@ public class InputValidate {
             String[] menu = menuInfo.split("-");
             String name = menu[0];
             if (findMenuByName(eventMenuList, name).isEmpty()) {
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(INVALID_ORDER.getErrorMessage());
             }
         }
     }
@@ -54,9 +58,13 @@ public class InputValidate {
 
         for (String menuInfo : menusInfos) {
             String[] menu = menuInfo.split("-");
-            int quantity = Integer.parseInt(menu[1]);
-            if (quantity < 1) {
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            try {
+                int quantity = Integer.parseInt(menu[1]);
+                if (quantity < 1) {
+                    throw new IllegalArgumentException(INVALID_ORDER.getErrorMessage());
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException(INVALID_ORDER.getErrorMessage());
             }
         }
     }
@@ -68,14 +76,14 @@ public class InputValidate {
             String[] split = menuInfo.split("-");
 
             if (split.length != 2) {
-                throw new IllegalArgumentException("[ERROR] 메뉴 정보 형식이 잘못되었습니다. 메뉴 이름과 메뉴 갯수는 '-'로 구분되어야 합니다.");
+                throw new IllegalArgumentException(INVALID_MENU_FORMAT.getErrorMessage());
             }
 
             String name = split[0];
             String quantity = split[1];
 
             if (name.isEmpty() || quantity.isEmpty()) {
-                throw new IllegalArgumentException("[ERROR] 메뉴 이름과 메뉴 갯수는 필수입니다.");
+                throw new IllegalArgumentException(INVALID_MENU_NAME_WITH_QUANTITY.getErrorMessage());
             }
         }
     }
