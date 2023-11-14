@@ -24,6 +24,6 @@ public enum Price {
                 return p.getPrice();
             }
         }
-        throw new IllegalArgumentException("해당 이름을 가진 메뉴가 없습니다. " + name);
+        throw new IllegalArgumentException("[ERROR] 해당 이름을 가진 메뉴가 없습니다. " + name);
     }
 }

@@ -97,7 +97,7 @@ public class InputValidate {
             String name = split[0];
 
             if (!nameSet.add(name)) {
-                throw new IllegalArgumentException("[ERROR] 중복된 메뉴 이름이 있습니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(INVALID_DUPLICATE_MENU_NAME.getErrorMessage());
             }
         }
     }
@@ -112,7 +112,7 @@ public class InputValidate {
             maxQuantity -= quantity;
         }
         if (maxQuantity < 0) {
-            throw new IllegalArgumentException("[ERROR] 주문 가능한 메뉴 갯수를 초과하였습니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(INVALID_MAX_MENU_QUANTITY.getErrorMessage());
         }
     }
 
@@ -127,6 +127,6 @@ public class InputValidate {
             if(findMenuByName.isPresent() && !findMenuByName.get().getCategory().equals(Category.DRINK)) {
                 return;
             }
-        } throw new IllegalArgumentException("[ERROR] 주문한 모든 메뉴가 음료입니다. 다시 입력해 주세요.");
+        } throw new IllegalArgumentException(INVALID_ORDERING_ONLY_DRINK.getErrorMessage());
     }
 }

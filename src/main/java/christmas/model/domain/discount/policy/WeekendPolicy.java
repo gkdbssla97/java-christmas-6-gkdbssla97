@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static christmas.model.domain.discount.DiscountPolicyName.*;
+import static christmas.util.constant.NumberConstant.*;
 
 public class WeekendPolicy implements DiscountPolicy{
     @Override
@@ -19,7 +20,7 @@ public class WeekendPolicy implements DiscountPolicy{
         int discountPrice = 0;
         for(Menu menu : orderMenuList) {
             if(menu.getCategory().equals(Category.MAIN)) {
-                discountPrice += menu.getCount() * 2023;
+                discountPrice += menu.getCount() * EVENT_YEAR;
             }
         }
         benefitDetails.put(WEEKEND,
