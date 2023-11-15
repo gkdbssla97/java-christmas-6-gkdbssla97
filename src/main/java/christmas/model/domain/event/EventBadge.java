@@ -17,11 +17,11 @@ public enum EventBadge {
 
     public static EventBadge grantEventBadge(int minAmount) {
         if (minAmount >= SANTA.minAmount) {
-            return EventBadge.SANTA;
+            return SANTA;
         } else if (minAmount >= TREE.minAmount) {
-            return EventBadge.TREE;
+            return TREE;
         } else if (minAmount >= STAR.minAmount) {
-            return EventBadge.STAR;
+            return STAR;
         }
         return NONE;
     }

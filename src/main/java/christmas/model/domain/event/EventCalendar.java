@@ -1,7 +1,5 @@
 package christmas.model.domain.event;
 
-import christmas.util.constant.NumberConstant;
-
 import java.util.Calendar;
 
 import static christmas.util.constant.NumberConstant.*;
@@ -15,7 +13,7 @@ public class EventCalendar {
 
     public boolean isWeekend(int day) {
         Calendar calendar = getInstance();
-        calendar.set(NumberConstant.EVENT_YEAR, DECEMBER, day);
+        calendar.set(EVENT_YEAR, DECEMBER, day);
         int dayOfWeek = calendar.get(DAY_OF_WEEK);
 
         return dayOfWeek == FRIDAY || dayOfWeek == SATURDAY;
@@ -23,7 +21,7 @@ public class EventCalendar {
 
     public boolean isSpecialDay(int day) {
         Calendar calendar = getInstance();
-        calendar.set(NumberConstant.EVENT_YEAR, DECEMBER, day);
+        calendar.set(EVENT_YEAR, DECEMBER, day);
         int dayOfWeek = calendar.get(DAY_OF_WEEK);
 
         return dayOfWeek == SUNDAY || day == CHRISTMAS_DAY;
