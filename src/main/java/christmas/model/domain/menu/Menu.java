@@ -6,8 +6,8 @@ public abstract class Menu {
 
     private final String name;
     private final int count;
-    private final Category category;
     private final int price;
+    private final Category category;
 
     public Menu(String name, int count, Category category) {
         this.name = name;
