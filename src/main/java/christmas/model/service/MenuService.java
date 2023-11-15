@@ -2,7 +2,8 @@ package christmas.model.service;
 
 import christmas.model.domain.event.EventManager;
 import christmas.model.domain.event.EventMenu;
-import christmas.model.domain.menu.*;
+import christmas.model.domain.menu.Category;
+import christmas.model.domain.menu.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,37 +13,28 @@ import static christmas.model.domain.factory.MenuFactory.*;
 public class MenuService {
 
     public void orderMenuList(EventManager eventManager, String menus, EventMenu eventMenu) {
-        List<Menu> eventMenuList = eventMenu.getEventMenuList();
-        List<Menu> orderMenuList = new ArrayList<>();
+        List<Menu> eventMenus = eventMenu.getEventMenus();
+        List<Menu> orderMenus = new ArrayList<>();
         String[] menusInfos = menus.split(",");
         for (String menuInfo : menusInfos) {
             String[] menu = menuInfo.split("-");
             String name = menu[0];
-            Category menuCategory = findMenuCategory(eventMenuList, name);
+            Category menuCategory = eventMenu.findMenuCategory(eventMenus, name);
             Menu registerMenu = registerMenu(menuCategory, menu);
-            orderMenuList.add(registerMenu);
+            orderMenus.add(registerMenu);
         }
-        eventManager.orderMenuList(orderMenuList);
+        eventManager.orderMenuList(orderMenus);
         eventManager.calculateTotalOrderPrice();
     }
 
-    public Category findMenuCategory(List<Menu> menuList, String name) {
-        for (Menu menu : menuList) {
-            if (menu.getName().equals(name)) {
-                return menu.getCategory();
-            }
-        }
-        throw new IllegalArgumentException();
-    }
-
     public void initializeMenuList(EventMenu eventMenu) {
-        List<Menu> menuList = new ArrayList<>();
+        List<Menu> menus = new ArrayList<>();
 
-        registerAppetizer(menuList);
-        registerMain(menuList);
-        registerDessert(menuList);
-        registerDrink(menuList);
+        registerAppetizer(menus);
+        registerMain(menus);
+        registerDessert(menus);
+        registerDrink(menus);
 
-        eventMenu.initializeMenuList(menuList);
+        eventMenu.initializeMenuList(menus);
     }
 }
