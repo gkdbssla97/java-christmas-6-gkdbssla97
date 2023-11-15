@@ -5,9 +5,9 @@ import static christmas.model.domain.menu.Price.*;
 public abstract class Menu {
 
     private final String name;
-    private final int count;
     private final int price;
-    private final Category category;
+    private int count;
+    private Category category;
 
     public Menu(String name, int count, Category category) {
         this.name = name;
