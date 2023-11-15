@@ -1,8 +1,6 @@
 package christmas.model.domain.menu;
 
-import christmas.util.validate.input.MenuError;
-
-import static christmas.util.validate.input.MenuError.*;
+import static christmas.util.validate.input.MenuError.INVALID_ORDER;
 
 public enum Price {
 
