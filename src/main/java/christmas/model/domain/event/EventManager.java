@@ -17,7 +17,6 @@ public class EventManager {
     private final HashMap<DiscountPolicyName, Integer> benefitDetails = new LinkedHashMap<>();
     private List<Menu> orderMenus;
     private int totalPrice;
-    private int benefitPrice;
     private EventBadge eventBadge;
 
     public EventManager() {
@@ -76,19 +75,18 @@ public class EventManager {
             totalBenefitByDiscount += benefitDetail.getValue();
         }
 
-        this.benefitPrice = totalBenefitByDiscount;
         return totalBenefitByDiscount;
     }
 
     public int calculateTotalPriceAfterDiscount() {
         if(isEligibleForPresentMenu()) {
-            return this.totalPrice + this.benefitPrice + 샴페인.getPrice();
+            return this.totalPrice + calculateTotalBenefitAfterDiscount() + 샴페인.getPrice();
         }
-        return this.totalPrice + this.benefitPrice;
+        return this.totalPrice + calculateTotalBenefitAfterDiscount();
     }
 
     public void grantEventBadge() {
-        this.eventBadge = EventBadge.grantEventBadge(Math.abs(benefitPrice));
+        this.eventBadge = EventBadge.grantEventBadge(Math.abs(calculateTotalBenefitAfterDiscount()));
     }
 
     public HashMap<DiscountPolicyName, Integer> getBenefitDetails() {
