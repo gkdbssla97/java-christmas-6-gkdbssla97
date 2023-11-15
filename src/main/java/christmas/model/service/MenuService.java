@@ -13,13 +13,14 @@ import static christmas.model.domain.factory.MenuFactory.*;
 public class MenuService {
 
     public void orderMenuList(EventManager eventManager, String menus, EventMenu eventMenu) {
-        List<Menu> eventMenus = eventMenu.getEventMenus();
+
         List<Menu> orderMenus = new ArrayList<>();
         String[] menusInfos = menus.split(",");
+
         for (String menuInfo : menusInfos) {
             String[] menu = menuInfo.split("-");
             String name = menu[0];
-            Category menuCategory = eventMenu.findMenuCategory(eventMenus, name);
+            Category menuCategory = eventMenu.findMenuCategory(name);
             Menu registerMenu = registerMenu(menuCategory, menu);
             orderMenus.add(registerMenu);
         }

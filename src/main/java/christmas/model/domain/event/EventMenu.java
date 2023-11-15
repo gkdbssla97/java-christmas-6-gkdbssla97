@@ -15,8 +15,8 @@ public class EventMenu {
         this.eventMenus = eventMenus;
     }
 
-    public Category findMenuCategory(List<Menu> menus, String name) {
-        for (Menu menu : menus) {
+    public Category findMenuCategory(String name) {
+        for (Menu menu : eventMenus) {
             if (menu.getName().equals(name)) {
                 return menu.getCategory();
             }
