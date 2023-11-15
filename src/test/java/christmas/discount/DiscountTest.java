@@ -64,7 +64,7 @@ public class DiscountTest {
 
         private static Stream<Arguments> provideInputDate() {
             return Stream.of(
-                    Arguments.of(1, -1000),
+                    Arguments.of(1, -1000 - (1 - 1) * 100),
                     Arguments.of(2, -1000 - (2 - 1) * 100),
                     Arguments.of(3, -1000 - (3 - 1) * 100),
                     Arguments.of(5, -1000 - (5 - 1) * 100),
