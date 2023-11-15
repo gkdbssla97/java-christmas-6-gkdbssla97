@@ -3,7 +3,6 @@ package christmas.util.validate;
 import christmas.model.domain.event.EventMenu;
 import christmas.model.domain.menu.Category;
 import christmas.model.domain.menu.Menu;
-import christmas.util.validate.input.MenuError;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,20 +33,20 @@ public class InputValidate {
     }
 
     public static void validateMenusNameByOrder(EventMenu eventMenu, String input) {
-        List<Menu> eventMenuList = eventMenu.getEventMenuList();
+        List<Menu> eventMenus = eventMenu.getEventMenus();
         String[] menusInfos = input.split(",");
 
         for (String menuInfo : menusInfos) {
             String[] menu = menuInfo.split("-");
             String name = menu[0];
-            if (findMenuByName(eventMenuList, name).isEmpty()) {
+            if (findMenuByName(eventMenus, name).isEmpty()) {
                 throw new IllegalArgumentException(INVALID_ORDER.getErrorMessage());
             }
         }
     }
 
-    public static Optional<Menu> findMenuByName(List<Menu> eventMenuList, String name) {
-        return eventMenuList.stream()
+    public static Optional<Menu> findMenuByName(List<Menu> eventMenus, String name) {
+        return eventMenus.stream()
                 .filter(menu -> menu.getName()
                         .equals(name))
                 .findFirst();
@@ -117,13 +116,13 @@ public class InputValidate {
     }
 
     public static void validateInputMenusByOrderingOnlyDrink(EventMenu eventMenu, String input) {
-        List<Menu> eventMenuList = eventMenu.getEventMenuList();
+        List<Menu> eventMenus = eventMenu.getEventMenus();
         String[] menusInfos = input.split(",");
 
         for (String menuInfo : menusInfos) {
             String[] split = menuInfo.split("-");
             String name = split[0];
-            Optional<Menu> findMenuByName = findMenuByName(eventMenuList, name);
+            Optional<Menu> findMenuByName = findMenuByName(eventMenus, name);
             if(findMenuByName.isPresent() && !findMenuByName.get().getCategory().equals(Category.DRINK)) {
                 return;
             }

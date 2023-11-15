@@ -15,10 +15,10 @@ public class WeekendPolicy implements DiscountPolicy{
     @Override
     public void discount(EventManager eventManager, int date) {
         HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
-        List<Menu> orderMenuList = eventManager.getOrderMenuList();
+        List<Menu> orderMenus = eventManager.getOrderMenus();
 
         int discountPrice = 0;
-        for(Menu menu : orderMenuList) {
+        for(Menu menu : orderMenus) {
             if(menu.getCategory().equals(MAIN)) {
                 discountPrice += EVENT_YEAR;
             }

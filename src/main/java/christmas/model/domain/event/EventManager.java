@@ -2,34 +2,34 @@ package christmas.model.domain.event;
 
 import christmas.model.domain.discount.DiscountPolicyName;
 import christmas.model.domain.menu.Menu;
-import christmas.model.domain.menu.Price;
-import christmas.util.constant.NumberConstant;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static christmas.model.domain.menu.Price.*;
-import static christmas.util.constant.NumberConstant.*;
+import static christmas.model.domain.menu.Price.샴페인;
+import static christmas.util.constant.NumberConstant.ELIGIBLE_FOR_DISCOUNT;
+import static christmas.util.constant.NumberConstant.ELIGIBLE_PRESENT_PRICE;
 
 public class EventManager {
-    private List<Menu> orderMenuList;
+
+    private final HashMap<DiscountPolicyName, Integer> benefitDetails = new LinkedHashMap<>();
+    private List<Menu> orderMenus;
     private int totalPrice;
     private int benefitPrice;
-    private final HashMap<DiscountPolicyName, Integer> benefitDetails = new LinkedHashMap<>();
     private EventBadge eventBadge;
 
     public EventManager() {
         initializeBenefitDetails();
     }
 
-    public void orderMenuList(List<Menu> orderMenuList) {
-        this.orderMenuList = orderMenuList;
+    public void orderMenuList(List<Menu> orderMenus) {
+        this.orderMenus = orderMenus;
     }
 
     public void calculateTotalOrderPrice() {
-        for (Menu menu : this.orderMenuList) {
+        for (Menu menu : this.orderMenus) {
             this.totalPrice += (menu.getPrice() * menu.getCount());
         }
     }
@@ -50,7 +50,7 @@ public class EventManager {
         return totalPrice >= ELIGIBLE_PRESENT_PRICE;
     }
 
-    public boolean isEligibleForBenefitList() {
+    public boolean isEligibleForBenefitDetails() {
         int sum = 0;
         for (Map.Entry<DiscountPolicyName, Integer> benefitDetail : benefitDetails.entrySet()) {
             sum += benefitDetail.getValue();
@@ -58,24 +58,16 @@ public class EventManager {
         return sum != 0;
     }
 
-    public List<Menu> getOrderMenuList() {
-        return orderMenuList;
+    public List<Menu> getOrderMenus() {
+        return orderMenus;
     }
 
     public int getTotalPriceBeforeDiscount() {
         return totalPrice;
     }
 
-    public int getTotalPrice() {
-        return totalPrice;
-    }
-
     public String getEventBadge() {
         return eventBadge.getCategory();
-    }
-
-    public int getBenefitPrice() {
-        return benefitPrice;
     }
 
     public int calculateTotalBenefitAfterDiscount() {
@@ -88,7 +80,7 @@ public class EventManager {
         return totalBenefitByDiscount;
     }
 
-    public int getTotalPriceAfterDiscount() {
+    public int calculateTotalPriceAfterDiscount() {
         if(isEligibleForPresentMenu()) {
             return this.totalPrice + this.benefitPrice + 샴페인.getPrice();
         }

@@ -3,7 +3,6 @@ package christmas.view;
 import christmas.model.domain.event.EventManager;
 import christmas.model.domain.discount.DiscountPolicyName;
 import christmas.model.domain.menu.Menu;
-import christmas.util.constant.ViewConstant;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,7 @@ public class OutputView {
     public void printMenuList(EventManager eventManager) {
         System.out.println(PREVIEW_EVENT_BENEFIT);
         System.out.println(ORDER_MENU);
-        for(Menu orderMenu: eventManager.getOrderMenuList()) {
+        for(Menu orderMenu: eventManager.getOrderMenus()) {
             System.out.printf(MENU_INFO_FORMAT, orderMenu.getName(), orderMenu.getCount());
         }
     }
@@ -35,12 +34,12 @@ public class OutputView {
     }
 
     public void printBenefitList(EventManager eventManager) {
-        System.out.println(BENEFIT_LIST);
-        if(eventManager.isEligibleForBenefitList()) {
+        System.out.println(BENEFIT_DETAILS);
+        if(eventManager.isEligibleForBenefitDetails()) {
             HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
             for (Map.Entry<DiscountPolicyName, Integer> benefitDetail : benefitDetails.entrySet()) {
                 if(benefitDetail.getValue() != 0) {
-                    System.out.printf(BENEFIT_LIST_FORMAT, benefitDetail.getKey().getDiscountPolicy(), benefitDetail.getValue());
+                    System.out.printf(BENEFIT_DETAILS_FORMAT, benefitDetail.getKey().getDiscountPolicy(), benefitDetail.getValue());
                 }
             }
             return;
@@ -55,7 +54,7 @@ public class OutputView {
 
     public void printTotalOrderPriceAfterDiscount(EventManager eventManager) {
         System.out.println(TOTAL_PRICE_AFTER_DISCOUNT);
-        System.out.printf(TOTAL_PRICE_AFTER_DISCOUNT_FORMAT, eventManager.getTotalPriceAfterDiscount());
+        System.out.printf(TOTAL_PRICE_AFTER_DISCOUNT_FORMAT, eventManager.calculateTotalPriceAfterDiscount());
     }
 
     public void printEventBadge(EventManager eventManager) {
