@@ -14,7 +14,7 @@ public class OutputView {
     public void printMenuList(EventManager eventManager) {
         System.out.println(PREVIEW_EVENT_BENEFIT);
         System.out.println(ORDER_MENU);
-        for(Menu orderMenu: eventManager.getOrderMenus()) {
+        for (Menu orderMenu : eventManager.getOrderMenus()) {
             System.out.printf(MENU_INFO_FORMAT, orderMenu.getName(), orderMenu.getCount());
         }
     }
@@ -26,7 +26,7 @@ public class OutputView {
 
     public void printPresentMenu(EventManager eventManager) {
         System.out.println(PRESENT_MENU);
-        if(eventManager.isEligibleForPresentMenu()) {
+        if (eventManager.isEligibleForPresentMenu()) {
             System.out.println(CHAMPAGNE_ONE);
             return;
         }
@@ -35,10 +35,10 @@ public class OutputView {
 
     public void printBenefitList(EventManager eventManager) {
         System.out.println(BENEFIT_DETAILS);
-        if(eventManager.isEligibleForBenefitDetails()) {
+        if (eventManager.isEligibleForBenefitDetails()) {
             HashMap<DiscountPolicyName, Integer> benefitDetails = eventManager.getBenefitDetails();
             for (Map.Entry<DiscountPolicyName, Integer> benefitDetail : benefitDetails.entrySet()) {
-                if(benefitDetail.getValue() != 0) {
+                if (benefitDetail.getValue() != 0) {
                     System.out.printf(BENEFIT_DETAILS_FORMAT, benefitDetail.getKey().getDiscountPolicy(), benefitDetail.getValue());
                 }
             }

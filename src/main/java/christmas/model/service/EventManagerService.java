@@ -9,7 +9,7 @@ public class EventManagerService {
 
     public void processBenefitDetails(int date, EventManager eventManager, EventCalendar eventCalendar) {
 
-        if(!eventManager.isEligibleForDiscount()) return;
+        if (!eventManager.isEligibleForDiscount()) return;
 
         applyDDayBenefit(date, eventManager, eventCalendar);
         applyWeekdayBenefit(date, eventManager, eventCalendar);
@@ -21,7 +21,7 @@ public class EventManagerService {
     private void applyDDayBenefit(int date, EventManager eventManager, EventCalendar eventCalendar) {
         DiscountCondition discountCondition = new DDayCondition();
         DiscountPolicy discountPolicy = new DDayPolicy();
-        if(discountCondition.isSatisfied(eventCalendar, date)) {
+        if (discountCondition.isSatisfied(eventCalendar, date)) {
             discountPolicy.discount(eventManager, date);
         }
     }
@@ -29,7 +29,7 @@ public class EventManagerService {
     private void applyWeekdayBenefit(int date, EventManager eventManager, EventCalendar eventCalendar) {
         DiscountCondition discountCondition = new WeekdayCondition();
         DiscountPolicy discountPolicy = new WeekdayPolicy();
-        if(discountCondition.isSatisfied(eventCalendar, date)) {
+        if (discountCondition.isSatisfied(eventCalendar, date)) {
             discountPolicy.discount(eventManager, date);
         }
     }
@@ -37,7 +37,7 @@ public class EventManagerService {
     private void applyWeekendBenefit(int date, EventManager eventManager, EventCalendar eventCalendar) {
         DiscountCondition discountCondition = new WeekendCondition();
         DiscountPolicy discountPolicy = new WeekendPolicy();
-        if(discountCondition.isSatisfied(eventCalendar, date)) {
+        if (discountCondition.isSatisfied(eventCalendar, date)) {
             discountPolicy.discount(eventManager, date);
         }
     }
@@ -45,14 +45,14 @@ public class EventManagerService {
     private void applySpecialDayBenefit(int date, EventManager eventManager, EventCalendar eventCalendar) {
         DiscountCondition discountCondition = new SpecialCondition();
         DiscountPolicy discountPolicy = new SpecialPolicy();
-        if(discountCondition.isSatisfied(eventCalendar, date)) {
+        if (discountCondition.isSatisfied(eventCalendar, date)) {
             discountPolicy.discount(eventManager, date);
         }
     }
 
     private void applyPresentEventBenefit(int date, EventManager eventManager) {
         DiscountPolicy discountPolicy = new PresentEventPolicy();
-        if(eventManager.isEligibleForPresentMenu()) {
+        if (eventManager.isEligibleForPresentMenu()) {
             discountPolicy.discount(eventManager, date);
         }
     }

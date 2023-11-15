@@ -79,7 +79,7 @@ public class EventManager {
     }
 
     public int calculateTotalPriceAfterDiscount() {
-        if(isEligibleForPresentMenu()) {
+        if (isEligibleForPresentMenu()) {
             return this.totalPrice + calculateTotalBenefitAfterDiscount() + 샴페인.getPrice();
         }
         return this.totalPrice + calculateTotalBenefitAfterDiscount();

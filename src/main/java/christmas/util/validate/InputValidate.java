@@ -123,9 +123,10 @@ public class InputValidate {
             String[] split = menuInfo.split("-");
             String name = split[0];
             Optional<Menu> findMenuByName = findMenuByName(eventMenus, name);
-            if(findMenuByName.isPresent() && !findMenuByName.get().getCategory().equals(Category.DRINK)) {
+            if (findMenuByName.isPresent() && !findMenuByName.get().getCategory().equals(Category.DRINK)) {
                 return;
             }
-        } throw new IllegalArgumentException(INVALID_ORDERING_ONLY_DRINK.getErrorMessage());
+        }
+        throw new IllegalArgumentException(INVALID_ORDERING_ONLY_DRINK.getErrorMessage());
     }
 }

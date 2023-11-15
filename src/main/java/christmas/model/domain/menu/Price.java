@@ -21,8 +21,8 @@ public enum Price {
     }
 
     public static int findPrice(String name) {
-        for(Price p : Price.values()) {
-            if(p.name().equals(name)) {
+        for (Price p : Price.values()) {
+            if (p.name().equals(name)) {
                 return p.getPrice();
             }
         }
